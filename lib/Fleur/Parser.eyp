@@ -7,6 +7,24 @@
 
 %%
 
+input:
+    line.content              {
+
+<< 'CODE'
+sub {
+my %count = %{ shift() };
+my $total = 0;
+$total += $_ for values %count;
+my %percent
+    = $total
+    ? map +( $_ => $count{$_} / $total ), keys %count
+    : map +( $_ => 0 ), keys %count;
+CODE
+. $content . "}\n";
+
+    }
+;
+
 line:
     stmt.stmt                 { "$stmt" }
   | line.line ';' stmt.stmt   { "$line$stmt" }
