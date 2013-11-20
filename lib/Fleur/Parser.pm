@@ -3705,13 +3705,13 @@ my $content = $_[1];
 
 << 'CODE'
 sub {
-my %count = %{ shift() };
-my $total = 0;
-$total += $_ for values %count;
-my %percent
-    = $total
-    ? map +( $_ => $count{$_} / $total ), keys %count
-    : map +( $_ => 0 ), keys %count;
+    my %count = %{ shift() };
+    my $total = 0;
+    $total += $_ for values %count;
+    my %percent
+        = $total
+        ? map +( $_ => $count{$_} / $total ), keys %count
+        : map +( $_ => 0 ), keys %count;
 CODE
 . $content . "}\n";
 
@@ -3740,21 +3740,21 @@ my $stmt = $_[3]; my $line = $_[1];  "$line$stmt" }
 		 'stmt', 3,
 sub {
 #line 35 "lib/Fleur/Parser.eyp"
-my $exp = $_[1]; my $NAME = $_[3];  "return '$NAME'\n    if $exp;\n"; }
+my $exp = $_[1]; my $NAME = $_[3];  "    return '$NAME'\n        if $exp;\n"; }
 #line 3744 lib/Fleur/Parser.pm
 	],
 	[#Rule stmt_6
 		 'stmt', 1,
 sub {
 #line 36 "lib/Fleur/Parser.eyp"
-my $NAME = $_[1];  "return '$NAME';\n" }
+my $NAME = $_[1];  "    return '$NAME';\n" }
 #line 3751 lib/Fleur/Parser.pm
 	],
 	[#Rule bool_7
 		 'bool', 3,
 sub {
 #line 40 "lib/Fleur/Parser.eyp"
-my $left = $_[1]; my $right = $_[3];  "$left\n    && $right" }
+my $left = $_[1]; my $right = $_[3];  "$left\n        && $right" }
 #line 3758 lib/Fleur/Parser.pm
 	],
 	[#Rule bool_8
