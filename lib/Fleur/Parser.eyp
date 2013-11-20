@@ -1,0 +1,36 @@
+%strict
+%whites /([ \t\n]+)/
+%token NUM  = /([0-9]+(?:\.[0-9]*)?|\.[0-9]+)/
+%token NAME = /([A-Za-z_][A-Za-z_0-9]*)/
+%token OP   = /([-+*\/])/
+%token BOP  = /([<>=]=?)/
+
+%%
+
+line:
+    stmt.stmt                 { "$stmt" }
+  | line.line ';' stmt.stmt   { "$line$stmt" }
+;
+
+stmt:
+    /* empty */
+  | bool.exp ':' $NAME        { "return '$NAME'\n    if $exp;\n"; }
+  | $NAME                     { "return '$NAME';\n" }
+;
+
+bool:
+    bool.left ',' bool.right  { "$left\n    && $right" }
+  | exp.left BOP.op exp.right { "$left $op $right" }
+;
+
+
+exp:
+    $NUM                      { $NUM }
+  | $NUM '%'                  { $NUM / 100 }
+  | $NAME                     { "\$count{$NAME}" }
+  | '%' $NAME                 { "\$percent{$NAME}" }
+  | exp.left OP.op exp.right  { "$left $op $right" }
+  | '(' exp.exp ')'           { "( $exp )" }
+;
+
+%%
