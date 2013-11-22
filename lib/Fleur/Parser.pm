@@ -3431,7 +3431,7 @@ our $LEX = sub {
     for (${$self->input}) {
       
 
-      /\G([ \t\n]+)/gc and $self->tokenline($1 =~ tr{\n}{});
+      /\G(\s*(?:#.*)?\s*)/gc and $self->tokenline($1 =~ tr{\n}{});
 
       m{\G(\:|\;|\,|\%|\(|\))}gc and return ($1, $1);
 

@@ -1,5 +1,5 @@
 %strict
-%whites /([ \t\n]+)/
+%whites /(\s*(?:#.*)?\s*)/
 %token NUM  = /([0-9]+(?:\.[0-9]*)?|\.[0-9]+)/
 %token NAME = /([A-Za-z_][A-Za-z_0-9]*)/
 %token OP   = /([-+*\/])/
