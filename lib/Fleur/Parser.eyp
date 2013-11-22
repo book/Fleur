@@ -45,8 +45,8 @@ bool:
 exp:
     $NUM                      { $NUM }
   | $NUM '%'                  { $NUM / 100 }
-  | $NAME                     { "\$count{$NAME}" }
-  | '%' $NAME                 { "\$percent{$NAME}" }
+  | $NAME                     { "( \$count{$NAME} ||= 0 )" }
+  | '%' $NAME                 { "( \$percent{$NAME} ||= 0 )" }
   | exp.left OP.op exp.right  { "$left $op $right" }
   | '(' exp.exp ')'           { "( $exp )" }
 ;

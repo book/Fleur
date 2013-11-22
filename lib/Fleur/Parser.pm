@@ -3782,14 +3782,14 @@ my $NUM = $_[1];  $NUM / 100 }
 		 'exp', 1,
 sub {
 #line 48 "lib/Fleur/Parser.eyp"
-my $NAME = $_[1];  "\$count{$NAME}" }
+my $NAME = $_[1];  "( \$count{$NAME} ||= 0 )" }
 #line 3786 lib/Fleur/Parser.pm
 	],
 	[#Rule exp_12
 		 'exp', 2,
 sub {
 #line 49 "lib/Fleur/Parser.eyp"
-my $NAME = $_[2];  "\$percent{$NAME}" }
+my $NAME = $_[2];  "( \$percent{$NAME} ||= 0 )" }
 #line 3793 lib/Fleur/Parser.pm
 	],
 	[#Rule exp_13
