@@ -1,8 +1,7 @@
+use strict;
+use warnings;
 use Test::More;
-
-BEGIN {
- use_ok( 'Fleur::Parser' ) || print "Run, Forrest, Run!\n";
-}
+use Fleur;
 
 my @scores = (
     { result => 'UNKN', data => { OK => 1, CRIT => 1 } },
@@ -11,13 +10,10 @@ my @scores = (
     { result => 'CRIT', data => { OK => 2, CRIT => 2, WARN => 3 } },
 );
 
-my $fleur;
+my $fleur = Fleur->new;
 
 while( my $input = <DATA> ) {
-    $fleur = Fleur::Parser->new;
-    $fleur->input( $input );
-
-    my $sub = eval $fleur->Run;
+    my $sub = $fleur->parse($input);
     for my $score ( @scores ) {
         ok( $sub->($score->{data}) eq $score->{result}, "Expect $score->{result}" );
     }
