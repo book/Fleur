@@ -32,6 +32,10 @@ line:
 
 stmt:
     /* empty */               { "" }
+    /* empty */
+  | bool.exp ':' '{' line.line '}'
+                              { $line =~ s/^/    /gm;  # indent
+                                "    if ( $exp ) {\n$line    }\n" }
   | bool.exp ':' $NAME        { "    return '$NAME'\n        if $exp;\n"; }
   | $NAME                     { "    return '$NAME';\n" }
 ;

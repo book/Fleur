@@ -3433,7 +3433,7 @@ our $LEX = sub {
 
       /\G(\s*(?:#.*)?\s*)+/gc and $self->tokenline($1 =~ tr{\n}{});
 
-      m{\G(\:|\;|\,|\%|\(|\))}gc and return ($1, $1);
+      m{\G(\:|\}|\;|\{|\,|\%|\(|\))}gc and return ($1, $1);
 
       /\G([0-9]+(?:\.[0-9]*)?|\.[0-9]+)/gc and return ('NUM', $1);
       /\G([A-Za-z_][A-Za-z_0-9]*)/gc and return ('NAME', $1);
@@ -3475,16 +3475,17 @@ sub new {
   [ 'line_2' => 'line', [ 'stmt' ], 0 ],
   [ 'line_3' => 'line', [ 'line', ';', 'stmt' ], 0 ],
   [ 'stmt_4' => 'stmt', [  ], 0 ],
-  [ 'stmt_5' => 'stmt', [ 'bool', ':', 'NAME' ], 0 ],
-  [ 'stmt_6' => 'stmt', [ 'NAME' ], 0 ],
-  [ 'bool_7' => 'bool', [ 'bool', ',', 'bool' ], 0 ],
-  [ 'bool_8' => 'bool', [ 'exp', 'BOP', 'exp' ], 0 ],
-  [ 'exp_9' => 'exp', [ 'NUM' ], 0 ],
-  [ 'exp_10' => 'exp', [ 'NUM', '%' ], 0 ],
-  [ 'exp_11' => 'exp', [ 'NAME' ], 0 ],
-  [ 'exp_12' => 'exp', [ '%', 'NAME' ], 0 ],
-  [ 'exp_13' => 'exp', [ 'exp', 'OP', 'exp' ], 0 ],
-  [ 'exp_14' => 'exp', [ '(', 'exp', ')' ], 0 ],
+  [ 'stmt_5' => 'stmt', [ 'bool', ':', '{', 'line', '}' ], 0 ],
+  [ 'stmt_6' => 'stmt', [ 'bool', ':', 'NAME' ], 0 ],
+  [ 'stmt_7' => 'stmt', [ 'NAME' ], 0 ],
+  [ 'bool_8' => 'bool', [ 'bool', ',', 'bool' ], 0 ],
+  [ 'bool_9' => 'bool', [ 'exp', 'BOP', 'exp' ], 0 ],
+  [ 'exp_10' => 'exp', [ 'NUM' ], 0 ],
+  [ 'exp_11' => 'exp', [ 'NUM', '%' ], 0 ],
+  [ 'exp_12' => 'exp', [ 'NAME' ], 0 ],
+  [ 'exp_13' => 'exp', [ '%', 'NAME' ], 0 ],
+  [ 'exp_14' => 'exp', [ 'exp', 'OP', 'exp' ], 0 ],
+  [ 'exp_15' => 'exp', [ '(', 'exp', ')' ], 0 ],
 ],
     yyLABELS  =>
 {
@@ -3495,14 +3496,15 @@ sub new {
   'stmt_4' => 4,
   'stmt_5' => 5,
   'stmt_6' => 6,
-  'bool_7' => 7,
+  'stmt_7' => 7,
   'bool_8' => 8,
-  'exp_9' => 9,
+  'bool_9' => 9,
   'exp_10' => 10,
   'exp_11' => 11,
   'exp_12' => 12,
   'exp_13' => 13,
   'exp_14' => 14,
+  'exp_15' => 15,
 },
     yyTERMS  =>
 { '' => { ISSEMANTIC => 0 },
@@ -3512,6 +3514,8 @@ sub new {
 	',' => { ISSEMANTIC => 0 },
 	':' => { ISSEMANTIC => 0 },
 	';' => { ISSEMANTIC => 0 },
+	'{' => { ISSEMANTIC => 0 },
+	'}' => { ISSEMANTIC => 0 },
 	BOP => { ISSEMANTIC => 1 },
 	NAME => { ISSEMANTIC => 1 },
 	NUM => { ISSEMANTIC => 1 },
@@ -3545,10 +3549,10 @@ sub new {
 	},
 	{#State 2
 		ACTIONS => {
-			'OP' => -11,
-			'BOP' => -11
+			'OP' => -12,
+			'BOP' => -12
 		},
-		DEFAULT => -6
+		DEFAULT => -7
 	},
 	{#State 3
 		ACTIONS => {
@@ -3573,7 +3577,7 @@ sub new {
 		ACTIONS => {
 			"%" => 16
 		},
-		DEFAULT => -9
+		DEFAULT => -10
 	},
 	{#State 8
 		ACTIONS => {
@@ -3616,7 +3620,8 @@ sub new {
 	},
 	{#State 12
 		ACTIONS => {
-			'NAME' => 22
+			'NAME' => 22,
+			"{" => 23
 		}
 	},
 	{#State 13
@@ -3628,37 +3633,37 @@ sub new {
 		},
 		GOTOS => {
 			'exp' => 1,
-			'bool' => 23
+			'bool' => 24
 		}
 	},
 	{#State 14
 		DEFAULT => 0
 	},
 	{#State 15
-		DEFAULT => -12
+		DEFAULT => -13
 	},
 	{#State 16
-		DEFAULT => -10
+		DEFAULT => -11
 	},
 	{#State 17
 		ACTIONS => {
 			'OP' => 11,
-			")" => 24
+			")" => 25
 		}
 	},
 	{#State 18
-		DEFAULT => -11
+		DEFAULT => -12
 	},
 	{#State 19
 		ACTIONS => {
-			'NUM' => 7,
-			"(" => 8,
 			'NAME' => 2,
-			"%" => 5
+			"%" => 5,
+			'NUM' => 7,
+			"(" => 8
 		},
 		DEFAULT => -4,
 		GOTOS => {
-			'stmt' => 25,
+			'stmt' => 26,
 			'exp' => 1,
 			'bool' => 3
 		}
@@ -3667,35 +3672,59 @@ sub new {
 		ACTIONS => {
 			'OP' => 11
 		},
-		DEFAULT => -8
+		DEFAULT => -9
 	},
 	{#State 21
 		ACTIONS => {
 			'OP' => 11
 		},
-		DEFAULT => -13
+		DEFAULT => -14
 	},
 	{#State 22
-		DEFAULT => -5
+		DEFAULT => -6
 	},
 	{#State 23
 		ACTIONS => {
-			"," => 13
+			'NUM' => 7,
+			"(" => 8,
+			'NAME' => 2,
+			"%" => 5
 		},
-		DEFAULT => -7
+		DEFAULT => -4,
+		GOTOS => {
+			'stmt' => 6,
+			'exp' => 1,
+			'bool' => 3,
+			'line' => 27
+		}
 	},
 	{#State 24
-		DEFAULT => -14
+		ACTIONS => {
+			"," => 13
+		},
+		DEFAULT => -8
 	},
 	{#State 25
+		DEFAULT => -15
+	},
+	{#State 26
 		DEFAULT => -3
+	},
+	{#State 27
+		ACTIONS => {
+			"}" => 28,
+			";" => 19
+		}
+	},
+	{#State 28
+		DEFAULT => -5
 	}
 ],
     yyrules  =>
 [
 	[#Rule _SUPERSTART
 		 '$start', 2, undef
-#line 3698 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3727 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule input_1
 		 'input', 1,
@@ -3716,101 +3745,109 @@ CODE
 . $content . "}\n";
 
     }
-#line 3719 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3748 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule line_2
 		 'line', 1,
 sub {
 #line 29 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $stmt = $_[1];  "$stmt" }
-#line 3726 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3755 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule line_3
 		 'line', 3,
 sub {
 #line 30 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $stmt = $_[3]; my $line = $_[1];  "$line$stmt" }
-#line 3733 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3762 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule stmt_4
 		 'stmt', 0,
 sub {
 #line 34 "lib/Hash/Weighted/Categorize/Parser.eyp"
  "" }
-#line 3740 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3769 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule stmt_5
-		 'stmt', 3,
+		 'stmt', 5,
 sub {
-#line 35 "lib/Hash/Weighted/Categorize/Parser.eyp"
-my $exp = $_[1]; my $NAME = $_[3];  "    return '$NAME'\n        if $exp;\n"; }
-#line 3747 lib/Hash/Weighted/Categorize/Parser.pm
+#line 37 "lib/Hash/Weighted/Categorize/Parser.eyp"
+my $exp = $_[1]; my $line = $_[4];  $line =~ s/^/    /gm;  # indent
+                                "    if ( $exp ) {\n$line    }\n" }
+#line 3777 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule stmt_6
+		 'stmt', 3,
+sub {
+#line 39 "lib/Hash/Weighted/Categorize/Parser.eyp"
+my $exp = $_[1]; my $NAME = $_[3];  "    return '$NAME'\n        if $exp;\n"; }
+#line 3784 lib/Hash/Weighted/Categorize/Parser.pm
+	],
+	[#Rule stmt_7
 		 'stmt', 1,
 sub {
-#line 36 "lib/Hash/Weighted/Categorize/Parser.eyp"
-my $NAME = $_[1];  "    return '$NAME';\n" }
-#line 3754 lib/Hash/Weighted/Categorize/Parser.pm
-	],
-	[#Rule bool_7
-		 'bool', 3,
-sub {
 #line 40 "lib/Hash/Weighted/Categorize/Parser.eyp"
-my $left = $_[1]; my $right = $_[3];  "$left\n        && $right" }
-#line 3761 lib/Hash/Weighted/Categorize/Parser.pm
+my $NAME = $_[1];  "    return '$NAME';\n" }
+#line 3791 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule bool_8
 		 'bool', 3,
 sub {
-#line 41 "lib/Hash/Weighted/Categorize/Parser.eyp"
-my $left = $_[1]; my $right = $_[3]; my $op = $_[2];  "$left $op $right" }
-#line 3768 lib/Hash/Weighted/Categorize/Parser.pm
+#line 44 "lib/Hash/Weighted/Categorize/Parser.eyp"
+my $left = $_[1]; my $right = $_[3];  "$left\n        && $right" }
+#line 3798 lib/Hash/Weighted/Categorize/Parser.pm
 	],
-	[#Rule exp_9
-		 'exp', 1,
+	[#Rule bool_9
+		 'bool', 3,
 sub {
-#line 46 "lib/Hash/Weighted/Categorize/Parser.eyp"
-my $NUM = $_[1];  $NUM }
-#line 3775 lib/Hash/Weighted/Categorize/Parser.pm
+#line 45 "lib/Hash/Weighted/Categorize/Parser.eyp"
+my $left = $_[1]; my $right = $_[3]; my $op = $_[2];  "$left $op $right" }
+#line 3805 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_10
-		 'exp', 2,
-sub {
-#line 47 "lib/Hash/Weighted/Categorize/Parser.eyp"
-my $NUM = $_[1];  $NUM / 100 }
-#line 3782 lib/Hash/Weighted/Categorize/Parser.pm
-	],
-	[#Rule exp_11
 		 'exp', 1,
 sub {
-#line 48 "lib/Hash/Weighted/Categorize/Parser.eyp"
-my $NAME = $_[1];  "( \$count{$NAME} ||= 0 )" }
-#line 3789 lib/Hash/Weighted/Categorize/Parser.pm
+#line 50 "lib/Hash/Weighted/Categorize/Parser.eyp"
+my $NUM = $_[1];  $NUM }
+#line 3812 lib/Hash/Weighted/Categorize/Parser.pm
 	],
-	[#Rule exp_12
+	[#Rule exp_11
 		 'exp', 2,
 sub {
-#line 49 "lib/Hash/Weighted/Categorize/Parser.eyp"
-my $NAME = $_[2];  "( \$percent{$NAME} ||= 0 )" }
-#line 3796 lib/Hash/Weighted/Categorize/Parser.pm
+#line 51 "lib/Hash/Weighted/Categorize/Parser.eyp"
+my $NUM = $_[1];  $NUM / 100 }
+#line 3819 lib/Hash/Weighted/Categorize/Parser.pm
+	],
+	[#Rule exp_12
+		 'exp', 1,
+sub {
+#line 52 "lib/Hash/Weighted/Categorize/Parser.eyp"
+my $NAME = $_[1];  "( \$count{$NAME} ||= 0 )" }
+#line 3826 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_13
-		 'exp', 3,
+		 'exp', 2,
 sub {
-#line 50 "lib/Hash/Weighted/Categorize/Parser.eyp"
-my $left = $_[1]; my $right = $_[3]; my $op = $_[2];  "$left $op $right" }
-#line 3803 lib/Hash/Weighted/Categorize/Parser.pm
+#line 53 "lib/Hash/Weighted/Categorize/Parser.eyp"
+my $NAME = $_[2];  "( \$percent{$NAME} ||= 0 )" }
+#line 3833 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_14
 		 'exp', 3,
 sub {
-#line 51 "lib/Hash/Weighted/Categorize/Parser.eyp"
+#line 54 "lib/Hash/Weighted/Categorize/Parser.eyp"
+my $left = $_[1]; my $right = $_[3]; my $op = $_[2];  "$left $op $right" }
+#line 3840 lib/Hash/Weighted/Categorize/Parser.pm
+	],
+	[#Rule exp_15
+		 'exp', 3,
+sub {
+#line 55 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $exp = $_[2];  "( $exp )" }
-#line 3810 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3847 lib/Hash/Weighted/Categorize/Parser.pm
 	]
 ],
-#line 3813 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3850 lib/Hash/Weighted/Categorize/Parser.pm
     yybypass       => 0,
     yybuildingtree => 0,
     yyprefix       => '',
@@ -3831,18 +3868,19 @@ my $exp = $_[2];  "( $exp )" }
          'stmt_4', 
          'stmt_5', 
          'stmt_6', 
-         'bool_7', 
+         'stmt_7', 
          'bool_8', 
-         'exp_9', 
+         'bool_9', 
          'exp_10', 
          'exp_11', 
          'exp_12', 
          'exp_13', 
-         'exp_14', );
+         'exp_14', 
+         'exp_15', );
   $self;
 }
 
-#line 54 "lib/Hash/Weighted/Categorize/Parser.eyp"
+#line 58 "lib/Hash/Weighted/Categorize/Parser.eyp"
 
 
 
@@ -3851,7 +3889,7 @@ my $exp = $_[2];  "( $exp )" }
 =cut
 
 
-#line 3854 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3892 lib/Hash/Weighted/Categorize/Parser.pm
 
 
 
