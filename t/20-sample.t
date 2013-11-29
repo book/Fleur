@@ -19,9 +19,9 @@ color:
 # grey
 %red   >= 11/36, %green >= 11/36, %blue >= 11/36: grey;
 # secondary
-blue  > 0, green / blue  > 33/36, green / blue  < 36/33: cyan;
-red   > 0, blue  / red   > 33/36, blue  / red   < 36/33: magenta;
-green > 0, red   / green > 33/36, red   / green < 36/33: yellow;
+blue  > red,   green > red,   green / blue  > 33/36, green / blue  < 36/33: cyan;
+red   > green, blue  > green, blue  / red   > 33/36, blue  / red   < 36/33: magenta;
+green > blue,  red   > blue,  red   / green > 33/36, red   / green < 36/33: yellow;
 # primary
 %red   >= 50%: red;
 %green >= 50%: green;
@@ -58,6 +58,7 @@ my %test = (
         [ 'D8F99E' => 'unknown' ],
         [ 'DB4263' => 'red' ],
         [ 'FC68F2' => 'magenta' ],
+        [ '9DCEA1' => 'unknown' ],
     ],
 );
 
