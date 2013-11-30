@@ -4,15 +4,15 @@
 #
 # (c) Parse::Yapp Copyright 1998-2001 Francois Desarmenien.
 # (c) Parse::Eyapp Copyright 2006-2008 Casiano Rodriguez-Leon. Universidad de La Laguna.
-#        Don't edit this file, use source file 'lib/Fleur/Parser.eyp' instead.
+#        Don't edit this file, use source file 'lib/Hash/Weighted/Categorize/Parser.eyp' instead.
 #
 #             ANY CHANGE MADE HERE WILL BE LOST !
 #
 ########################################################################################
-package Fleur::Parser;
+package Hash::Weighted::Categorize::Parser;
 use strict;
 
-push @Fleur::Parser::ISA, 'Parse::Eyapp::Driver';
+push @Hash::Weighted::Categorize::Parser::ISA, 'Parse::Eyapp::Driver';
 
 
 
@@ -3455,10 +3455,10 @@ our $LEX = sub {
 ;
 
 
-#line 3458 lib/Fleur/Parser.pm
+#line 3458 lib/Hash/Weighted/Categorize/Parser.pm
 
 my $warnmessage =<< "EOFWARN";
-Warning!: Did you changed the \@Fleur::Parser::ISA variable inside the header section of the eyapp program?
+Warning!: Did you changed the \@Hash::Weighted::Categorize::Parser::ISA variable inside the header section of the eyapp program?
 EOFWARN
 
 sub new {
@@ -3518,7 +3518,7 @@ sub new {
 	OP => { ISSEMANTIC => 1 },
 	error => { ISSEMANTIC => 0 },
 },
-    yyFILENAME  => 'lib/Fleur/Parser.eyp',
+    yyFILENAME  => 'lib/Hash/Weighted/Categorize/Parser.eyp',
     yystates =>
 [
 	{#State 0
@@ -3695,12 +3695,12 @@ sub new {
 [
 	[#Rule _SUPERSTART
 		 '$start', 2, undef
-#line 3698 lib/Fleur/Parser.pm
+#line 3698 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule input_1
 		 'input', 1,
 sub {
-#line 11 "lib/Fleur/Parser.eyp"
+#line 11 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $content = $_[1]; 
 
 << 'CODE'
@@ -3716,98 +3716,98 @@ CODE
 . $content . "}\n";
 
     }
-#line 3719 lib/Fleur/Parser.pm
+#line 3719 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule line_2
 		 'line', 1,
 sub {
-#line 29 "lib/Fleur/Parser.eyp"
+#line 29 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $stmt = $_[1];  "$stmt" }
-#line 3726 lib/Fleur/Parser.pm
+#line 3726 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule line_3
 		 'line', 3,
 sub {
-#line 30 "lib/Fleur/Parser.eyp"
+#line 30 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $stmt = $_[3]; my $line = $_[1];  "$line$stmt" }
-#line 3733 lib/Fleur/Parser.pm
+#line 3733 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule stmt_4
 		 'stmt', 0, undef
-#line 3737 lib/Fleur/Parser.pm
+#line 3737 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule stmt_5
 		 'stmt', 3,
 sub {
-#line 35 "lib/Fleur/Parser.eyp"
+#line 35 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $exp = $_[1]; my $NAME = $_[3];  "    return '$NAME'\n        if $exp;\n"; }
-#line 3744 lib/Fleur/Parser.pm
+#line 3744 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule stmt_6
 		 'stmt', 1,
 sub {
-#line 36 "lib/Fleur/Parser.eyp"
+#line 36 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NAME = $_[1];  "    return '$NAME';\n" }
-#line 3751 lib/Fleur/Parser.pm
+#line 3751 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule bool_7
 		 'bool', 3,
 sub {
-#line 40 "lib/Fleur/Parser.eyp"
+#line 40 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $left = $_[1]; my $right = $_[3];  "$left\n        && $right" }
-#line 3758 lib/Fleur/Parser.pm
+#line 3758 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule bool_8
 		 'bool', 3,
 sub {
-#line 41 "lib/Fleur/Parser.eyp"
+#line 41 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $left = $_[1]; my $right = $_[3]; my $op = $_[2];  "$left $op $right" }
-#line 3765 lib/Fleur/Parser.pm
+#line 3765 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_9
 		 'exp', 1,
 sub {
-#line 46 "lib/Fleur/Parser.eyp"
+#line 46 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NUM = $_[1];  $NUM }
-#line 3772 lib/Fleur/Parser.pm
+#line 3772 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_10
 		 'exp', 2,
 sub {
-#line 47 "lib/Fleur/Parser.eyp"
+#line 47 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NUM = $_[1];  $NUM / 100 }
-#line 3779 lib/Fleur/Parser.pm
+#line 3779 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_11
 		 'exp', 1,
 sub {
-#line 48 "lib/Fleur/Parser.eyp"
+#line 48 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NAME = $_[1];  "( \$count{$NAME} ||= 0 )" }
-#line 3786 lib/Fleur/Parser.pm
+#line 3786 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_12
 		 'exp', 2,
 sub {
-#line 49 "lib/Fleur/Parser.eyp"
+#line 49 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NAME = $_[2];  "( \$percent{$NAME} ||= 0 )" }
-#line 3793 lib/Fleur/Parser.pm
+#line 3793 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_13
 		 'exp', 3,
 sub {
-#line 50 "lib/Fleur/Parser.eyp"
+#line 50 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $left = $_[1]; my $right = $_[3]; my $op = $_[2];  "$left $op $right" }
-#line 3800 lib/Fleur/Parser.pm
+#line 3800 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_14
 		 'exp', 3,
 sub {
-#line 51 "lib/Fleur/Parser.eyp"
+#line 51 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $exp = $_[2];  "( $exp )" }
-#line 3807 lib/Fleur/Parser.pm
+#line 3807 lib/Hash/Weighted/Categorize/Parser.pm
 	]
 ],
-#line 3810 lib/Fleur/Parser.pm
+#line 3810 lib/Hash/Weighted/Categorize/Parser.pm
     yybypass       => 0,
     yybuildingtree => 0,
     yyprefix       => '',
@@ -3839,7 +3839,7 @@ my $exp = $_[2];  "( $exp )" }
   $self;
 }
 
-#line 54 "lib/Fleur/Parser.eyp"
+#line 54 "lib/Hash/Weighted/Categorize/Parser.eyp"
 
 
 
@@ -3848,7 +3848,7 @@ my $exp = $_[2];  "( $exp )" }
 =cut
 
 
-#line 3851 lib/Fleur/Parser.pm
+#line 3851 lib/Hash/Weighted/Categorize/Parser.pm
 
 
 

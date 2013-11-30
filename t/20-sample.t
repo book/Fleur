@@ -1,7 +1,7 @@
 use strict;
 use warnings;
 use Test::More;
-use Fleur;
+use Hash::Weighted::Categorize;
 
 # build the various coderefs
 my %categorize = map split( /:/, $_, 2 ), split /^---.*?^/ms, << 'CODE';
@@ -71,7 +71,7 @@ $_->[0] = {
     for @{ $test{color} };
 
 # generate coderefs
-my $fleur = Fleur->new();
+my $fleur = Hash::Weighted::Categorize->new();
 $_ = $fleur->parse($_) for values %categorize;
 
 # run the tests

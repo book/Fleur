@@ -1,12 +1,12 @@
-package Fleur;
+package Hash::Weighted::Categorize;
 
-# code eval'ed by Fleur
+# code eval'ed by Hash::Weighted::Categorize
 # will have none of the extras lexically provided by Moo
 sub __eval { eval shift }
 
 use Moo;
 
-use Fleur::Parser;
+use Hash::Weighted::Categorize::Parser;
 
 has _parser => (
     is      => 'lazy',
@@ -14,7 +14,7 @@ has _parser => (
 
 sub _build__parser {
     my ($self) = @_;
-    return Fleur::Parser->new();
+    return Hash::Weighted::Categorize::Parser->new();
 }
 
 sub parse_to_source {
@@ -37,7 +37,7 @@ __END__
 =head1 SYNOPSIS
 
     # create a parser
-    my $parser = Fleur->new(
+    my $parser = Hash::Weighted::Categorize->new(
         input   => [qw( OK WARN CRIT UNKN )],
         default => 'OK',
         strict => 1,    # die when the hash contains unknown status names
@@ -65,8 +65,8 @@ __END__
 
 =head1 DESCRIPTION
 
-Fleur is a tool to easily create scoring functions (think monitoring)
-based on a simple mini-language. A Fleur object is a parser for this
+Hash::Weighted::Categorize is a tool to easily create scoring functions (think monitoring)
+based on a simple mini-language. A Hash::Weighted::Categorize object is a parser for this
 mini-language, that will return coderefs implementing a scoring function
 written in this language.
 
@@ -74,7 +74,7 @@ written in this language.
 
 =head2 new()
 
-Create a new L<Fleur> object.
+Create a new L<Hash::Weighted::Categorize> object.
 
 =head2 parse( $code )
 
@@ -87,7 +87,7 @@ code reference that would be returned by C<parse()>.
 
 =head1 DOMAIN SPECIFIC LANGUAGE
 
-The I<domain specific language> parsed by L<Fleur> is intentionnaly very
+The I<domain specific language> parsed by L<Hash::Weighted::Categorize> is intentionnaly very
 simple. Simple statements consist of boolean expressions separated by
 commas (C<,> meaning I<logical AND>), and terminated by a colon (C<:>)
 followed by the result to be returned if the condition is true.
