@@ -3733,81 +3733,84 @@ my $stmt = $_[3]; my $line = $_[1];  "$line$stmt" }
 #line 3733 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule stmt_4
-		 'stmt', 0, undef
-#line 3737 lib/Hash/Weighted/Categorize/Parser.pm
+		 'stmt', 0,
+sub {
+#line 34 "lib/Hash/Weighted/Categorize/Parser.eyp"
+ "" }
+#line 3740 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule stmt_5
 		 'stmt', 3,
 sub {
 #line 35 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $exp = $_[1]; my $NAME = $_[3];  "    return '$NAME'\n        if $exp;\n"; }
-#line 3744 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3747 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule stmt_6
 		 'stmt', 1,
 sub {
 #line 36 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NAME = $_[1];  "    return '$NAME';\n" }
-#line 3751 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3754 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule bool_7
 		 'bool', 3,
 sub {
 #line 40 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $left = $_[1]; my $right = $_[3];  "$left\n        && $right" }
-#line 3758 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3761 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule bool_8
 		 'bool', 3,
 sub {
 #line 41 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $left = $_[1]; my $right = $_[3]; my $op = $_[2];  "$left $op $right" }
-#line 3765 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3768 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_9
 		 'exp', 1,
 sub {
 #line 46 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NUM = $_[1];  $NUM }
-#line 3772 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3775 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_10
 		 'exp', 2,
 sub {
 #line 47 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NUM = $_[1];  $NUM / 100 }
-#line 3779 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3782 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_11
 		 'exp', 1,
 sub {
 #line 48 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NAME = $_[1];  "( \$count{$NAME} ||= 0 )" }
-#line 3786 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3789 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_12
 		 'exp', 2,
 sub {
 #line 49 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $NAME = $_[2];  "( \$percent{$NAME} ||= 0 )" }
-#line 3793 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3796 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_13
 		 'exp', 3,
 sub {
 #line 50 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $left = $_[1]; my $right = $_[3]; my $op = $_[2];  "$left $op $right" }
-#line 3800 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3803 lib/Hash/Weighted/Categorize/Parser.pm
 	],
 	[#Rule exp_14
 		 'exp', 3,
 sub {
 #line 51 "lib/Hash/Weighted/Categorize/Parser.eyp"
 my $exp = $_[2];  "( $exp )" }
-#line 3807 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3810 lib/Hash/Weighted/Categorize/Parser.pm
 	]
 ],
-#line 3810 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3813 lib/Hash/Weighted/Categorize/Parser.pm
     yybypass       => 0,
     yybuildingtree => 0,
     yyprefix       => '',
@@ -3848,7 +3851,7 @@ my $exp = $_[2];  "( $exp )" }
 =cut
 
 
-#line 3851 lib/Hash/Weighted/Categorize/Parser.pm
+#line 3854 lib/Hash/Weighted/Categorize/Parser.pm
 
 
 

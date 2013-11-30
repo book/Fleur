@@ -31,7 +31,7 @@ line:
 ;
 
 stmt:
-    /* empty */
+    /* empty */               { "" }
   | bool.exp ':' $NAME        { "    return '$NAME'\n        if $exp;\n"; }
   | $NAME                     { "    return '$NAME';\n" }
 ;
