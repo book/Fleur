@@ -37,11 +37,7 @@ __END__
 =head1 SYNOPSIS
 
     # create a parser
-    my $parser = Hash::Weighted::Categorize->new(
-        input   => [qw( OK WARN CRIT UNKN )],
-        default => 'OK',
-        strict => 1,    # die when the hash contains unknown status names
-    );
+    my $parser = Hash::Weighted::Categorize->new();
 
     # generate a scoring function
     my $score = $parser->parse( << 'CODE' );
