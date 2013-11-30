@@ -107,6 +107,12 @@ category compared to the total is used in the expression.
 
 A literal number followed by a C<%> sign is simply divided by C<100>.
 
+The currently supported mathematical operators are:
+C<+>, C<->, C<*> and C</>.
+
+The currently suppored comparison operators are:
+C<< < >>, C<< <= >>, C<==>, C<< > >> and C<< >= >>.
+
 =head1 ACKNOWLEDGMENTS
 
 This module was originally developed for Booking.com. With approval from
