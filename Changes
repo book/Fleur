@@ -1,0 +1,10 @@
+Revision history for Hash-Weighted-Categorize
+
+{{$NEXT}}
+
+        [PERL IS HARD, LET'S MAKE UP A DSL]
+        - The supported DSL is really minimal for now,
+          some extensions are already planned
+        - The module was named "Fleur" during initial development,
+          but we have a serious name now
+
