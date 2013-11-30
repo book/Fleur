@@ -122,6 +122,9 @@ author would like to express his gratitude.
 This module is the result of scratching my colleague Menno Blom's itch
 during a company-sponsored hackathon. Thanks to everyone involved.
 
+The name of this module owes a lot to the C<module-authors> mailing-list,
+and especially to Aristotle Pagaltzis. Thanks to everyone involved.
+
 =head1 COPYRIGHT
 
 Copyright 2013 Philippe Bruhat (BooK), all rights reserved.
