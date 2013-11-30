@@ -87,10 +87,11 @@ code reference that would be returned by C<parse()>.
 
 =head1 DOMAIN SPECIFIC LANGUAGE
 
-The I<domain specific language> parsed by L<Hash::Weighted::Categorize> is intentionnaly very
-simple. Simple statements consist of boolean expressions separated by
-commas (C<,> meaning I<logical AND>), and terminated by a colon (C<:>)
-followed by the result to be returned if the condition is true.
+The I<domain specific language> parsed by L<Hash::Weighted::Categorize>
+is intentionaly very simple. Simple statements consist of boolean
+expressions separated by commas (C<,> meaning I<logical AND>), and
+terminated by a colon (C<:>) followed by the result to be returned if
+the condition is true.
 
 In the following example:
 
