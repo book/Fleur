@@ -107,7 +107,7 @@ A literal number followed by a C<%> sign is simply divided by C<100>.
 The currently supported mathematical operators are:
 C<+>, C<->, C<*> and C</>.
 
-The currently suppored comparison operators are:
+The currently supported comparison operators are:
 C<< < >>, C<< <= >>, C<==>, C<< > >> and C<< >= >>.
 
 =head1 ACKNOWLEDGMENTS
