@@ -2,8 +2,12 @@ Revision history for Hash-Weighted-Categorize
 
 {{$NEXT}}
 
-0.001 Sat Nov 30 2013
+0.002 Tue Dec 24 2013
+        [ENHANCEMENTS]
+        - added support for the != comparison operator
+        - added support for nested blocks
 
+0.001 Sat Nov 30 2013
         [PERL IS HARD, LET'S MAKE UP A DSL]
         - The supported DSL is really minimal for now,
           some extensions are already planned
