@@ -108,7 +108,26 @@ The currently supported mathematical operators are:
 C<+>, C<->, C<*> and C</>.
 
 The currently supported comparison operators are:
-C<< < >>, C<< <= >>, C<==>, C<< > >> and C<< >= >>.
+C<< < >>, C<< <= >>, C<==>, C<!=>, C<< > >> and C<< >= >>.
+
+The mini-language supports the use of brace-delimited blocks, nested at
+an arbitrary depth, which allows to write complex expressions such as:
+
+    %CRIT >= 10%: {
+         %CRIT > 20% : CRIT;
+         %OK   > 85% : OK;
+         WARN;
+    }
+    WARN > 0 : WARN;
+    OK;
+
+which is equivalent to:
+
+    %CRIT >= 10%, %CRIT > 20% : CRIT;
+    %CRIT >= 10%, %OK   > 85% : OK;
+    %CRIT >= 10%              : WARN;
+    WARN > 0 : WARN;
+    OK;
 
 =head1 ACKNOWLEDGMENTS
 
