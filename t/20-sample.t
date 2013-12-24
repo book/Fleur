@@ -28,6 +28,16 @@ green > blue,  red   > blue,  red   / green > 33/36, red   / green < 36/33: yell
 %blue  >= 0.5: blue;
 # whatever
 unknown;
+---
+nested:
+%OK == 1: OK;
+%CRIT >= 10% : {
+    CRIT >= 20: CRIT;
+    %OK  > 85%: OK;
+    WARN;
+};
+WARN != 0: WARN;
+UNKN;
 CODE
 
 # test data
@@ -59,6 +69,15 @@ my %test = (
         [ 'DB4263' => 'red' ],
         [ 'FC68F2' => 'magenta' ],
         [ '9DCEA1' => 'unknown' ],
+    ],
+    nested => [
+        [ { OK => 1, CRIT => 1 } => 'WARN' ],
+        [ { OK => 9, CRIT => 1 } => 'OK' ],
+        [ { OK => 8, CRIT => 1, WARN => 1 } => 'WARN' ],
+        [ { OK => 1, CRIT => 5 } => 'WARN' ],
+        [ { OK => 2, CRIT => 2, WARN => 3 } => 'WARN' ],
+        [ { OK => 10 } => 'OK' ],
+        [ { OK => 10, CRIT => 20 } => 'CRIT' ],
     ],
 );
 
