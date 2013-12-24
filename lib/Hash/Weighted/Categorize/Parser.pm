@@ -3438,7 +3438,7 @@ our $LEX = sub {
       /\G([0-9]+(?:\.[0-9]*)?|\.[0-9]+)/gc and return ('NUM', $1);
       /\G([A-Za-z_][A-Za-z_0-9]*)/gc and return ('NAME', $1);
       /\G([-+*\/])/gc and return ('OP', $1);
-      /\G([<>]=?|==)/gc and return ('BOP', $1);
+      /\G([<>]=?|[!=]=)/gc and return ('BOP', $1);
 
 
       return ('', undef) if ($_ eq '') || (defined(pos($_)) && (pos($_) >= length($_)));
